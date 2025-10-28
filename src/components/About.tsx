@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
+import rolandoPolo from "../assets/rolando-juarez-polo.png"; // 👈 Importa tu imagen local
 // --- SVG del Icono de Play (Mantenido) ---
 const PlayIcon = () => (
   <svg 
@@ -116,13 +116,14 @@ const AboutMeSection = () => {
             className="w-full lg:w-1/2 flex justify-center relative my-10 lg:my-0"
             variants={imageVariants}
           >
-            <div className="relative w-[300px] h-[300px] rounded-full overflow-hidden border-4 border-green-500 shadow-lg shadow-green-500/50">
-              <img
-                src="https://via.placeholder.com/300x300.png?text=Your+Profile+Image"
-                alt={`Perfil de ${aboutData.name}`}
-                className="w-full h-full object-cover"
-              />
-            </div>
+  <div className="relative w-[400px] h-[400px] rounded-full overflow-hidden">
+  <img
+    src={rolandoPolo}
+    alt="Rolando Juarez"
+    className="w-full h-full object-cover"
+  />
+</div>
+
           </motion.div>
 
           {/* COLUMNA DERECHA: TEXTO, ESTADÍSTICAS Y BOTONES */}

@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
     <nav className="fixed w-full bg-black/90 backdrop-blur-sm z-50 shadow-lg border-b border-gray-800">
       <div className="flex justify-between items-center py-4 px-6 md:px-10">
         {/* LOGO */}
-        <h1 className="text-2xl font-bold text-neon cursor-pointer">Ahmed.</h1>
+        <h1 className="text-2xl font-bold text-neon cursor-pointer">Juarez.</h1>
 
         {/* MENU DESKTOP */}
         <ul className="hidden md:flex space-x-8 text-gray-300">

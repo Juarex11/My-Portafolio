@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-
+import rolando from "../assets/rolando-juarez.png";
 const Hero: React.FC = () => {
   return (
     <section className="min-h-screen flex flex-col md:flex-row items-center justify-center px-10 text-center md:text-left pt-24 pb-20 overflow-hidden max-w-7xl mx-auto">
@@ -12,8 +12,8 @@ const Hero: React.FC = () => {
       >
         <p className="text-gray-400 mb-2">Hello There!</p>
         <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-          I'm <span className="text-green-500">QJ Ahmed</span>, <br />
-          Web Developer <br /> based in UAE.
+          I'm <span className="text-green-500">Rolando Ismahel Juarez</span>, <br />
+          Web Developer <br /> based.
         </h1>
         <motion.p
           initial={{ opacity: 0 }}
@@ -46,14 +46,14 @@ const Hero: React.FC = () => {
         transition={{ duration: 1 }}
         className="flex-1 flex justify-center mt-10 md:mt-0"
       >
-        <div className="relative">
-          <div className="absolute inset-0 bg-green-500 opacity-20 rounded-full blur-3xl"></div>
-          <img
-            src="https://i.ibb.co/NyMRvqb/person.png"
-            alt="Ahmed portrait"
-            className="w-72 md:w-96 rounded-full z-10 relative"
-          />
-        </div>
+        <div className="relative flex justify-center">
+  <img
+    src={rolando}
+    alt="Rolando Juarez"
+    className="w-96 md:w-[480px] rounded-full z-10 relative object-cover shadow-2xl"
+  />
+</div>
+
       </motion.div>
     </section>
   );
