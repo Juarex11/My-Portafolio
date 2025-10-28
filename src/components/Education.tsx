@@ -2,6 +2,12 @@ import React from 'react';
 import { GraduationCap, Briefcase } from 'lucide-react';
 
 const EducationWork = () => {
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   const education = [
     {
       institution: "Harmony Institute",
@@ -41,8 +47,8 @@ const EducationWork = () => {
   return (
     <div className="min-h-screen bg-black text-white py-20 px-6">
       {/* Header */}
-      <div className="text-center mb-16">
-        <p className="text-gray-400 text-sm uppercase tracking-wider mb-4">Education & Work</p>
+      <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}>
+        <p className="text-gray-400 text-sm uppercase tracking-wider mb-4 animate-pulse">Education & Work</p>
         
         <h1 className="text-5xl font-bold">
           My <span className="text-green-500">Academic &</span>
@@ -54,9 +60,10 @@ const EducationWork = () => {
       {/* Content Grid */}
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 relative z-10">
         {/* Education Section */}
-        <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800">
+        <div className={`bg-zinc-900 rounded-2xl p-8 border border-zinc-800 transition-all duration-700 hover:border-green-500 hover:shadow-2xl hover:shadow-green-500/20 hover:scale-105 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
+             style={{ transitionDelay: '200ms' }}>
           <div className="flex items-center gap-3 mb-8">
-            <div className="bg-green-500 p-3 rounded-full">
+            <div className="bg-green-500 p-3 rounded-full animate-bounce">
               <GraduationCap className="w-6 h-6 text-black" />
             </div>
             <h2 className="text-2xl font-bold">Education</h2>
@@ -64,12 +71,14 @@ const EducationWork = () => {
 
           <div className="space-y-6">
             {education.map((item, index) => (
-              <div key={index} className="border-l-4 border-green-500 pl-6 pb-6 last:pb-0 flex justify-between items-start">
+              <div key={index} 
+                   className={`border-l-4 border-green-500 pl-6 pb-6 last:pb-0 flex justify-between items-start transition-all duration-500 hover:translate-x-2 hover:border-l-8 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+                   style={{ transitionDelay: `${400 + index * 100}ms` }}>
                 <div>
                   <h3 className="text-xl font-semibold mb-1">{item.institution}</h3>
                   <p className="text-gray-400">{item.degree}</p>
                 </div>
-                <span className="bg-green-500 text-black text-base font-semibold px-5 py-2 rounded-full whitespace-nowrap ml-4">
+                <span className="bg-green-500 text-black text-base font-semibold px-5 py-2 rounded-full whitespace-nowrap ml-4 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-green-500/50">
                   {item.period}
                 </span>
               </div>
@@ -78,9 +87,10 @@ const EducationWork = () => {
         </div>
 
         {/* Work Experience Section */}
-        <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800">
+        <div className={`bg-zinc-900 rounded-2xl p-8 border border-zinc-800 transition-all duration-700 hover:border-green-500 hover:shadow-2xl hover:shadow-green-500/20 hover:scale-105 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}
+             style={{ transitionDelay: '200ms' }}>
           <div className="flex items-center gap-3 mb-8">
-            <div className="bg-green-500 p-3 rounded-full">
+            <div className="bg-green-500 p-3 rounded-full animate-bounce">
               <Briefcase className="w-6 h-6 text-black" />
             </div>
             <h2 className="text-2xl font-bold">Work Experience</h2>
@@ -88,12 +98,14 @@ const EducationWork = () => {
 
           <div className="space-y-6">
             {workExperience.map((item, index) => (
-              <div key={index} className="border-l-4 border-green-500 pl-6 pb-6 last:pb-0 flex justify-between items-start">
+              <div key={index} 
+                   className={`border-l-4 border-green-500 pl-6 pb-6 last:pb-0 flex justify-between items-start transition-all duration-500 hover:translate-x-2 hover:border-l-8 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+                   style={{ transitionDelay: `${400 + index * 100}ms` }}>
                 <div>
                   <h3 className="text-xl font-semibold mb-1">{item.company}</h3>
                   <p className="text-gray-400">{item.position}</p>
                 </div>
-                <span className="bg-green-500 text-black text-base font-semibold px-5 py-2 rounded-full whitespace-nowrap ml-4">
+                <span className="bg-green-500 text-black text-base font-semibold px-5 py-2 rounded-full whitespace-nowrap ml-4 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-green-500/50">
                   {item.period}
                 </span>
               </div>

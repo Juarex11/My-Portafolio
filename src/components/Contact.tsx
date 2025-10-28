@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, CheckCircle, X } from 'lucide-react';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +12,8 @@ const ContactForm = () => {
     message: ''
   });
 
+  const [showSuccess, setShowSuccess] = useState(false);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -19,13 +21,71 @@ const ContactForm = () => {
     });
   };
 
-  const handleSubmit = () => {
-    console.log('Form submitted:', formData);
-    alert('Message sent successfully!');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("https://api.fondodesarrollom.com/api/saveContact.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setShowSuccess(true);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          budget: '',
+          interest: '',
+          country: '',
+          message: ''
+        });
+        setTimeout(() => setShowSuccess(false), 4000);
+      } else {
+        alert("❌ Error: " + data.error);
+      }
+    } catch (error) {
+      alert("⚠️ No se pudo conectar con el servidor");
+    }
   };
 
   return (
     <div className="min-h-screen bg-black text-white py-20 px-6 relative overflow-hidden">
+      {/* Success Modal */}
+      {showSuccess && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-60 backdrop-blur-sm">
+          <div className="bg-zinc-900 border-2 border-green-500 rounded-2xl p-8 max-w-md w-full relative animate-in fade-in slide-in-from-bottom-4 duration-300">
+            <button
+              onClick={() => setShowSuccess(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            
+            <div className="flex flex-col items-center text-center">
+              <div className="bg-green-500 bg-opacity-20 rounded-full p-4 mb-4">
+                <CheckCircle className="w-16 h-16 text-green-500" />
+              </div>
+              
+              <h3 className="text-2xl font-bold mb-2">¡Message Sent Successfully!</h3>
+              <p className="text-gray-300 mb-6">
+                Thank you for reaching out! Your message has been received and saved. 
+                We'll get back to you as soon as possible.
+              </p>
+              
+              <button
+                onClick={() => setShowSuccess(false)}
+                className="bg-green-500 text-black font-semibold px-8 py-3 rounded-lg hover:bg-green-400 transition-colors"
+              >
+                Got it!
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Background Text */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 pointer-events-none">
         <h2 className="text-[8rem] md:text-[12rem] font-black text-gray-800 opacity-10 whitespace-nowrap tracking-tight leading-none">
