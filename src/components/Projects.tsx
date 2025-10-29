@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import p1 from "../assets/1.png";
+import p2 from "../assets/2.png";
+import p3 from "../assets/3.png";
+import p4 from "../assets/4.png";
 
 // --- Icono de Flecha (para la tarjeta) ---
 const ArrowIcon = () => (
@@ -23,7 +27,7 @@ const projectsData = [
     shortDescription: "A modern, user-friendly dashboard for tracking income, expenses, analytics, and card details with quick transfer and activity summaries.",
     longDescription: "This project was a deep dive into modern fintech UI/UX. The goal was to create a highly intuitive and responsive interface that could handle complex data visualizations. We focused on component-based architecture using React, data visualization with Chart.js, and a sleek, modern feel using MUI's component library.",
     techStack: ["React.js", "MUI CSS", "Chart.js"],
-    previewImage: "https://via.placeholder.com/800x600/111111/ffffff?text=Project+1",
+    previewImage: p1,
     modalImages: [
       "https://via.placeholder.com/600x400/333333/ffffff?text=P1+Image+1",
       "https://via.placeholder.com/600x400/333333/ffffff?text=P1+Image+2",
@@ -37,7 +41,7 @@ const projectsData = [
     shortDescription: "A full-stack e-commerce solution with machine learning-powered product recommendations and seamless checkout experience.",
     longDescription: "Built with Next.js and integrated with Stripe for payments, this platform features real-time inventory management, AI-driven product suggestions, and a highly optimized mobile-first design. The recommendation engine uses collaborative filtering to suggest products based on user behavior.",
     techStack: ["Next.js", "Node.js", "TensorFlow", "Stripe"],
-    previewImage: "https://via.placeholder.com/800x600/111111/ffffff?text=Project+2",
+    previewImage: p2,
     modalImages: [
       "https://via.placeholder.com/600x400/333333/ffffff?text=P2+Image+1",
       "https://via.placeholder.com/600x400/333333/ffffff?text=P2+Image+2",
@@ -51,7 +55,7 @@ const projectsData = [
     shortDescription: "A collaborative workspace for remote teams with live editing, video calls, and project management features.",
     longDescription: "This application combines WebRTC for real-time video communication, WebSocket for live document editing, and a comprehensive task management system. Built with scalability in mind, it supports thousands of concurrent users with minimal latency.",
     techStack: ["Vue.js", "WebRTC", "Socket.io", "MongoDB"],
-    previewImage: "https://via.placeholder.com/800x600/111111/ffffff?text=Project+3",
+    previewImage: p3,
     modalImages: [
       "https://via.placeholder.com/600x400/333333/ffffff?text=P3+Image+1",
       "https://via.placeholder.com/600x400/333333/ffffff?text=P3+Image+2",
@@ -65,7 +69,7 @@ const projectsData = [
     shortDescription: "A comprehensive platform for managing patient records, appointments, and telemedicine consultations with HIPAA compliance.",
     longDescription: "Designed for healthcare providers, this system streamlines patient management with secure data storage, appointment scheduling, prescription management, and integrated video consultations. Security and privacy are at the core with end-to-end encryption and full HIPAA compliance.",
     techStack: ["Angular", "PostgreSQL", "AWS", "WebRTC"],
-    previewImage: "https://via.placeholder.com/800x600/111111/ffffff?text=Project+4",
+    previewImage: p4,
     modalImages: [
       "https://via.placeholder.com/600x400/333333/ffffff?text=P4+Image+1",
       "https://via.placeholder.com/600x400/333333/ffffff?text=P4+Image+2",
@@ -280,15 +284,11 @@ const PortfolioSection = () => {
               PORTFOLIO
             </h1>
             <h2 className="text-4xl md:text-5xl font-extrabold relative z-10">
-              Let's Have A Look <br /> At <span className="text-green-500">My Portfolio</span>
-            </h2>
+  Detrás de cada línea <br /> hay <span className="text-green-500">resultados reales</span>
+</h2>
+
           </div>
-          <a 
-            href="#all-projects"
-            className="bg-green-500 text-black font-bold py-3 px-6 rounded-full hover:bg-green-400 transition-colors shadow-lg shadow-green-500/30 hidden md:inline-block"
-          >
-            View All Projects
-          </a>
+         
         </div>
 
         {/* Lista de Proyectos (alternando posición de imagen) */}

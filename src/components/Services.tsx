@@ -30,29 +30,34 @@ const IconPlaceHolder: React.FC = () => {
 // --- Datos de los Servicios ---
 const servicesData = [
   {
-    title: "UI/UX Design",
-    description: "Diseño profesional que fusiona estética y funcionalidad para interfaces intuitivas y atractivas.",
+    title: "Desarrollo Full Stack",
+    description: "Creación de aplicaciones modernas con React, Node.js, Laravel y PHP",
   },
   {
-    title: "Application Design",
-    description: "Creación de experiencias de usuario visualmente atractivas y fáciles de usar para aplicaciones móviles.",
+    title: "Consultoría y Soporte TI",
+    description: "Asesoría especializada en infraestructura, mantenimiento y soluciones tecnológicas.",
   },
   {
-    title: "Website Development",
-    description: "Desarrollo y diseño web responsivo y de alto rendimiento utilizando las últimas tecnologías.",
+    title: "Arquitectura de Software y Diseño de APIs",
+    description: "Implementación de sistemas seguros, escalables y eficientes.",
   },
   {
-    title: "Branding & Identity",
-    description: "Construcción de una marca fuerte y coherente, desde el logo hasta la guía de estilo completa.",
+    title: "Gestión Técnica de Proyectos",
+    description: "Liderazgo de equipos de desarrollo y entrega de proyectos de alta calidad.",
   },
   {
-    title: "SEO Optimization",
-    description: "Implementación de estrategias SEO para mejorar la visibilidad orgánica y el ranking en buscadores.",
+    title: "Automatización de Procesos (RPA)",
+    description: "Optimización de tareas mediante scripts y bots con Python o N8N",
   },
   {
-    title: "Cloud Deployment",
-    description: "Despliegue y gestión de aplicaciones en la nube (AWS/Azure/GCP) con escalabilidad y seguridad.",
+    title: "Diseño UI/UX",
+    description: "Creación de interfaces intuitivas, modernas y centradas en la experiencia del usuario",
   },
+  {
+  title: "Diseño Web en WordPress",
+  description: "Desarrollo de sitios web profesionales y administrables con WordPress, optimizados para rendimiento y posicionamiento.",
+},
+
 ];
 
 // --- Componente de Tarjeta de Servicio ---
@@ -83,22 +88,34 @@ const ServiceCard: React.FC<{ service: typeof servicesData[0], delay: number }> 
         {service.description}
       </p>
       
-      <a href="#" className="flex items-center text-green-500 font-semibold text-sm group">
-        Learn More
-        <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
-      </a>
+      
     </motion.div>
   );
 };
 
 // --- Componente Principal About ---
 const About: React.FC = () => {
-  const roles = [
-    "FULL STACK",
-    "PROJECT MANAGER",
-    "UI/UX DESIGNER",
-    "SOFTWARE ENGINEER",
-  ];
+const roles = [
+  "FULL STACK DEVELOPER",
+  "SOFTWARE ARCHITECT",
+  "PROJECT MANAGER",
+  "TECH LEAD",
+  "UI/UX DESIGNER",
+  "SOFTWARE ENGINEER",
+  "DEVOPS ENGINEER",
+  "SYSTEM ADMINISTRATOR",
+  "IT CONSULTANT",
+  "TECHNICAL SUPPORT SPECIALIST",
+  "AUTOMATION DEVELOPER (RPA)",
+  "DATABASE DESIGNER",
+  "CLOUD SOLUTIONS ARCHITECT",
+  "CYBERSECURITY ANALYST",
+  "DATA ANALYST",
+  "INTEGRATION ENGINEER",
+  "SCRUM MASTER",
+  "INSTRUCTOR / MENTOR",
+];
+
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
@@ -165,12 +182,13 @@ const About: React.FC = () => {
             <h1 className="absolute -top-10 left-0 text-7xl md:text-9xl font-extrabold text-white/5 opacity-5 tracking-widest pointer-events-none">
               SERVICES
             </h1>
-            <p className="text-sm font-semibold text-white/70 mb-1 relative z-10">
-                My Specialization
-            </p>
-            <h2 className="text-4xl md:text-6xl font-extrabold relative z-10">
-              <span className="text-green-500">Services</span> I Provide
-            </h2>
+           <p className="text-sm font-semibold text-white/70 mb-1 relative z-10">
+  Experiencia y tecnología a su servicio
+</p>
+<h2 className="text-4xl md:text-6xl font-extrabold relative z-10">
+  <span className="text-green-500">Áreas</span> de Experiencia
+</h2>
+
           </div>
         </motion.div>
 

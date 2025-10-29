@@ -20,13 +20,14 @@ const PlayIcon = () => (
 
 // --- Datos para la sección "About Me" (Mantenido) ---
 const aboutData = {
-  name: 'QJ Ahmed',
+  name: 'ISMAHEL JUAREZ',
   description:
-    'a web developer passionate about clean code, modern design, user experience, and building responsive, accessible, and high-performing digital products.',
+    'Como Full Stack Developer y Consultor Tecnológico, disfruto impulsando proyectos que combinan creatividad, innovación y resultados reales, ayudando a las empresas a crecer y destacar en la era digital.',
   stats: [
-    { value: '6000+', label: 'Projects Completed' },
-    { value: '20+', label: 'Industry Covered' },
-    { value: '06+', label: 'Years Of Experience' },
+{ value: '600+', label: 'Proyectos Completados' },
+{ value: '20+', label: 'Sectores Atendidos' },
+{ value: '5+', label: 'Años de Experiencia' },
+
   ],
 };
 
@@ -135,14 +136,14 @@ const AboutMeSection = () => {
               className="text-green-500 font-bold tracking-widest text-sm mb-2"
               variants={textItemVariants}
             >
-              ABOUT ME
+              SOBRE MI
             </motion.p>
             
             <motion.h2 
               className="text-5xl font-extrabold mb-6"
               variants={textItemVariants}
             >
-              Who is <span className="text-green-500">{aboutData.name}</span>?
+              ¿Qué hace diferente a <span className="text-green-500">{aboutData.name}</span>?
             </motion.h2>
             
             <motion.p 
@@ -179,7 +180,7 @@ const AboutMeSection = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: 1 }}
               >
-                Download CV
+                Descargar CV
               </motion.a>
               
               {/* 🌟 BOTÓN DE PLAY MODIFICADO (ahora es 'button') 🌟 */}
@@ -191,7 +192,7 @@ const AboutMeSection = () => {
                 transition={{ duration: 0.3, delay: 1.1 }}
               >
                 <PlayIcon />
-                Mira mi presentación video
+                Mira mi presentación
               </motion.button>
             </div>
 
@@ -232,7 +233,7 @@ const AboutMeSection = () => {
               <div className="relative" style={{ paddingBottom: '56.25%' }}>
                 <iframe
                   className="absolute top-0 left-0 w-full h-full"
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=1"
+                  src=""
                   title="Video Presentation"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
