@@ -1,7 +1,44 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 import { motion, AnimatePresence } from 'framer-motion';
-import rolandoPolo from "../assets/rolando-juarez-polo.png"; // 👈 Importa tu imagen local
-// --- SVG del Icono de Play (Mantenido) ---
+import { useLanguage } from '../context/LanguageContext';
+import rolandoPolo from "../assets/rolando-juarez-polo.png";
+
+// --- Traducciones ---
+const translations = {
+  en: {
+    sectionLabel: "ABOUT ME",
+    title: "What makes",
+    titleName: "ISMAHEL JUAREZ",
+    titleEnd: "different?",
+    description: "As a Full Stack Developer and Technology Consultant, I enjoy driving projects that combine creativity, innovation, and real results, helping businesses grow and stand out in the digital age.",
+    stats: [
+      { value: '600+', label: 'Completed Projects' },
+      { value: '20+', label: 'Industries Served' },
+      { value: '5+', label: 'Years of Experience' },
+    ],
+    downloadCV: "Download CV",
+    watchPresentation: "Watch my presentation",
+    closeVideo: "Close video",
+  },
+  es: {
+    sectionLabel: "SOBRE MÍ",
+    title: "¿Qué hace diferente a",
+    titleName: "ISMAHEL JUAREZ",
+    titleEnd: "?",
+    description: "Como Full Stack Developer y Consultor Tecnológico, disfruto impulsando proyectos que combinan creatividad, innovación y resultados reales, ayudando a las empresas a crecer y destacar en la era digital.",
+    stats: [
+      { value: '600+', label: 'Proyectos Completados' },
+      { value: '20+', label: 'Sectores Atendidos' },
+      { value: '5+', label: 'Años de Experiencia' },
+    ],
+    downloadCV: "Descargar CV",
+    watchPresentation: "Mira mi presentación",
+    closeVideo: "Cerrar video",
+  },
+};
+
+// --- SVG del Icono de Play ---
 const PlayIcon = () => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
@@ -16,20 +53,6 @@ const PlayIcon = () => (
     />
   </svg>
 );
-
-
-// --- Datos para la sección "About Me" (Mantenido) ---
-const aboutData = {
-  name: 'ISMAHEL JUAREZ',
-  description:
-    'Como Full Stack Developer y Consultor Tecnológico, disfruto impulsando proyectos que combinan creatividad, innovación y resultados reales, ayudando a las empresas a crecer y destacar en la era digital.',
-  stats: [
-{ value: '600+', label: 'Proyectos Completados' },
-{ value: '20+', label: 'Sectores Atendidos' },
-{ value: '5+', label: 'Años de Experiencia' },
-
-  ],
-};
 
 // --- Definiciones de Variantes de Framer Motion ---
 const containerVariants = {
@@ -58,7 +81,7 @@ const imageVariants = {
   },
 };
 
-// 🌟 --- Variantes para el Modal de Video (Animación Izquierda a Derecha) --- 🌟
+// --- Variantes para el Modal de Video ---
 const overlayVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 0.3 } },
@@ -68,8 +91,8 @@ const overlayVariants = {
 const videoModalVariants = {
   hidden: { 
     opacity: 0, 
-    x: "-100vw", // Comienza completamente fuera de la pantalla a la izquierda
-    skewX: "-10deg" // Efecto "dinámico" al entrar
+    x: "-100vw",
+    skewX: "-10deg"
   },
   visible: { 
     opacity: 1, 
@@ -79,30 +102,28 @@ const videoModalVariants = {
       type: "spring", 
       stiffness: 100, 
       damping: 20,
-      delay: 0.1 // Pequeño retraso para que el fondo aparezca primero
+      delay: 0.1
     } 
   },
   exit: { 
     opacity: 0, 
-    x: "100vw", // Sale hacia la derecha
+    x: "100vw",
     skewX: "10deg",
     transition: { duration: 0.25 }
   },
 };
 
-// --- Componente principal: About Me (CON MODAL DESLIZANTE) ---
+// --- Componente principal: About Me ---
 const AboutMeSection = () => {
-
-  // 🌟 Estado para controlar la visibilidad del modal
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const { language } = useLanguage();
+  const t = translations[language];
 
   return (
-    // 🚨 Añadido 'overflow-x-hidden' al contenedor principal para evitar 
-    // que el modal cree una barra de scroll horizontal al estar fuera de pantalla
-    <section id="about" className="bg-black text-white pt-20 pb-20 md:pb-32 relative overflow-hidden overflow-x-hidden">
+    <section id="about" className="bg-black text-white pt-12 sm:pt-16 md:pt-20 pb-12 sm:pb-16 md:pb-20 lg:pb-32 relative overflow-hidden overflow-x-hidden">
       
-      <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[150px] md:text-[250px] font-extrabold text-white/5 opacity-5 tracking-widest pointer-events-none z-0">
-        ABOUT ME
+      <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[80px] sm:text-[120px] md:text-[180px] lg:text-[250px] font-extrabold text-white/5 opacity-5 tracking-widest pointer-events-none z-0">
+        {t.sectionLabel}
       </h1>
 
       <motion.div 
@@ -111,102 +132,99 @@ const AboutMeSection = () => {
         whileInView="visible" 
         viewport={{ once: true, amount: 0.2 }} 
       >
-        <div className="flex flex-col lg:flex-row items-center justify-between">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
           {/* COLUMNA IZQUIERDA: IMAGEN */}
           <motion.div
-            className="w-full lg:w-1/2 flex justify-center relative my-10 lg:my-0"
+            className="w-full lg:w-1/2 flex justify-center relative my-6 sm:my-8 lg:my-0"
             variants={imageVariants}
           >
-  <div className="relative w-[400px] h-[400px] rounded-full overflow-hidden">
-  <img
-    src={rolandoPolo}
-    alt="Rolando Juarez"
-    className="w-full h-full object-cover"
-  />
-</div>
-
+            <div className="relative w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] md:w-[400px] md:h-[400px] rounded-full overflow-hidden shadow-2xl shadow-green-500/20 border-4 border-green-500/20">
+              <img
+                src={rolandoPolo}
+                alt="Rolando Juarez"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </motion.div>
 
           {/* COLUMNA DERECHA: TEXTO, ESTADÍSTICAS Y BOTONES */}
           <motion.div
-            className="w-full lg:w-1/2 lg:pl-16 text-center lg:text-left"
+            className="w-full lg:w-1/2 lg:pl-8 xl:pl-16 text-center lg:text-left"
             variants={containerVariants}
           >
             <motion.p 
-              className="text-green-500 font-bold tracking-widest text-sm mb-2"
+              className="text-green-500 font-bold tracking-widest text-xs sm:text-sm mb-2"
               variants={textItemVariants}
             >
-              SOBRE MI
+              {t.sectionLabel}
             </motion.p>
             
             <motion.h2 
-              className="text-5xl font-extrabold mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 sm:mb-6 leading-tight"
               variants={textItemVariants}
             >
-              ¿Qué hace diferente a <span className="text-green-500">{aboutData.name}</span>?
+              {t.title} <span className="text-green-500">{t.titleName}</span>{t.titleEnd}
             </motion.h2>
             
             <motion.p 
-              className="text-white/70 text-lg mb-8 max-w-lg lg:mx-0 mx-auto"
+              className="text-white/70 text-base sm:text-lg mb-6 sm:mb-8 max-w-lg lg:mx-0 mx-auto"
               variants={textItemVariants}
             >
-              {aboutData.description}
+              {t.description}
             </motion.p>
 
             {/* Estadísticas */}
-            <div className="flex justify-center lg:justify-start gap-8 mb-10">
-              {aboutData.stats.map((stat, index) => (
+            <div className="flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-10">
+              {t.stats.map((stat, index) => (
                 <motion.div 
                   key={index} 
-                  className="text-center"
+                  className="text-center min-w-[100px]"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.6 + index * 0.15 }}
                 >
-                  <p className="text-4xl font-extrabold text-green-500 mb-1">{stat.value}</p>
-                  <p className="text-white/70 text-sm">{stat.label}</p>
+                  <p className="text-3xl sm:text-4xl font-extrabold text-green-500 mb-1">{stat.value}</p>
+                  <p className="text-white/70 text-xs sm:text-sm">{stat.label}</p>
                 </motion.div>
               ))}
             </div>
 
-            {/* 🌟 ZONA DE BOTONES MODIFICADA 🌟 */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            {/* ZONA DE BOTONES */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
               {/* Botón CV */}
               <motion.a
                 href="/path/to/your/cv.pdf" 
                 download
-                className="inline-block bg-green-500 text-black font-bold py-3 px-8 rounded-full hover:bg-green-400 transition-colors shadow-lg shadow-green-500/50"
+                className="inline-block bg-green-500 text-black font-bold py-2.5 sm:py-3 px-6 sm:px-8 rounded-full hover:bg-green-400 transition-colors shadow-lg shadow-green-500/50 text-sm sm:text-base text-center"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: 1 }}
               >
-                Descargar CV
+                {t.downloadCV}
               </motion.a>
               
-              {/* 🌟 BOTÓN DE PLAY MODIFICADO (ahora es 'button') 🌟 */}
+              {/* BOTÓN DE PLAY */}
               <motion.button
                 onClick={() => setIsVideoOpen(true)}
-                className="inline-flex items-center justify-center bg-transparent border-2 border-green-500 text-green-500 font-bold py-3 px-8 rounded-full hover:bg-green-500 hover:text-black transition-colors"
+                className="inline-flex items-center justify-center bg-transparent border-2 border-green-500 text-green-500 font-bold py-2.5 sm:py-3 px-6 sm:px-8 rounded-full hover:bg-green-500 hover:text-black transition-colors text-sm sm:text-base"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: 1.1 }}
               >
                 <PlayIcon />
-                Mira mi presentación
+                {t.watchPresentation}
               </motion.button>
             </div>
 
           </motion.div>
         </div>
-
-        {/* Ya no hay <hr> ni video incrustado aquí */}
       </motion.div>
 
-      {/* 🎬 MODAL DE VIDEO PRESENTACIÓN (CON AnimatePresence) 🎬 */}
+      {/* MODAL DE VIDEO PRESENTACIÓN */}
       <AnimatePresence>
         {isVideoOpen && (
           <motion.div
-            className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50 cursor-zoom-out"
+            className="fixed inset-0 bg-black/80 flex items-center justify-center p-3 sm:p-4 z-50 cursor-zoom-out"
             variants={overlayVariants}
             initial="hidden"
             animate="visible"
@@ -214,17 +232,17 @@ const AboutMeSection = () => {
             onClick={() => setIsVideoOpen(false)}
           >
             <motion.div
-              className="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-2xl shadow-green-500/30 border border-green-700 relative"
+              className="w-full max-w-4xl bg-black rounded-lg sm:rounded-xl overflow-hidden shadow-2xl shadow-green-500/30 border border-green-700 relative"
               variants={videoModalVariants}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Botón de cerrar (dentro del modal de video) */}
+              {/* Botón de cerrar */}
               <button
                 onClick={() => setIsVideoOpen(false)}
-                className="absolute top-3 right-3 p-2 bg-black/60 text-white rounded-full hover:bg-black/80 transition z-50"
-                aria-label="Cerrar video"
+                className="absolute top-2 right-2 sm:top-3 sm:right-3 p-1.5 sm:p-2 bg-black/60 text-white rounded-full hover:bg-black/80 transition z-50"
+                aria-label={t.closeVideo}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>

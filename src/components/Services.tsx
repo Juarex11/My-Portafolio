@@ -1,6 +1,123 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
+
+// --- Traducciones ---
+const translations = {
+  en: {
+    sectionLabel: "SERVICES",
+    subtitle: "Experience and technology at your service",
+    title: "Areas",
+    titleEnd: "of Expertise",
+    roles: [
+      "FULL STACK DEVELOPER",
+      "SOFTWARE ARCHITECT",
+      "PROJECT MANAGER",
+      "TECH LEAD",
+      "UI/UX DESIGNER",
+      "SOFTWARE ENGINEER",
+      "DEVOPS ENGINEER",
+      "SYSTEM ADMINISTRATOR",
+      "IT CONSULTANT",
+      "TECHNICAL SUPPORT SPECIALIST",
+      "AUTOMATION DEVELOPER (RPA)",
+      "DATABASE DESIGNER",
+      "CLOUD SOLUTIONS ARCHITECT",
+      "CYBERSECURITY ANALYST",
+      "DATA ANALYST",
+      "INTEGRATION ENGINEER",
+      "SCRUM MASTER",
+      "INSTRUCTOR / MENTOR",
+    ],
+    services: [
+      {
+        title: "Full Stack Development",
+        description: "Building modern applications with React, Node.js, Laravel, and PHP",
+      },
+      {
+        title: "IT Consulting & Support",
+        description: "Specialized advisory in infrastructure, maintenance, and technology solutions.",
+      },
+      {
+        title: "Software Architecture & API Design",
+        description: "Implementation of secure, scalable, and efficient systems.",
+      },
+      {
+        title: "Technical Project Management",
+        description: "Leading development teams and delivering high-quality projects.",
+      },
+      {
+        title: "Process Automation (RPA)",
+        description: "Task optimization through scripts and bots with Python or N8N",
+      },
+      {
+        title: "UI/UX Design",
+        description: "Creating intuitive, modern interfaces focused on user experience",
+      },
+      {
+        title: "WordPress Web Design",
+        description: "Professional and manageable website development with WordPress, optimized for performance and SEO.",
+      },
+    ],
+  },
+  es: {
+    sectionLabel: "SERVICIOS",
+    subtitle: "Experiencia y tecnología a su servicio",
+    title: "Áreas",
+    titleEnd: "de Experiencia",
+    roles: [
+      "DESARROLLADOR FULL STACK",
+      "ARQUITECTO DE SOFTWARE",
+      "GESTOR DE PROYECTOS",
+      "LÍDER TÉCNICO",
+      "DISEÑADOR UI/UX",
+      "INGENIERO DE SOFTWARE",
+      "INGENIERO DEVOPS",
+      "ADMINISTRADOR DE SISTEMAS",
+      "CONSULTOR TI",
+      "ESPECIALISTA EN SOPORTE TÉCNICO",
+      "DESARROLLADOR DE AUTOMATIZACIÓN (RPA)",
+      "DISEÑADOR DE BASES DE DATOS",
+      "ARQUITECTO DE SOLUCIONES CLOUD",
+      "ANALISTA DE CIBERSEGURIDAD",
+      "ANALISTA DE DATOS",
+      "INGENIERO DE INTEGRACIÓN",
+      "SCRUM MASTER",
+      "INSTRUCTOR / MENTOR",
+    ],
+    services: [
+      {
+        title: "Desarrollo Full Stack",
+        description: "Creación de aplicaciones modernas con React, Node.js, Laravel y PHP",
+      },
+      {
+        title: "Consultoría y Soporte TI",
+        description: "Asesoría especializada en infraestructura, mantenimiento y soluciones tecnológicas.",
+      },
+      {
+        title: "Arquitectura de Software y Diseño de APIs",
+        description: "Implementación de sistemas seguros, escalables y eficientes.",
+      },
+      {
+        title: "Gestión Técnica de Proyectos",
+        description: "Liderazgo de equipos de desarrollo y entrega de proyectos de alta calidad.",
+      },
+      {
+        title: "Automatización de Procesos (RPA)",
+        description: "Optimización de tareas mediante scripts y bots con Python o N8N",
+      },
+      {
+        title: "Diseño UI/UX",
+        description: "Creación de interfaces intuitivas, modernas y centradas en la experiencia del usuario",
+      },
+      {
+        title: "Diseño Web en WordPress",
+        description: "Desarrollo de sitios web profesionales y administrables con WordPress, optimizados para rendimiento y posicionamiento.",
+      },
+    ],
+  },
+};
 
 // --- SVG del Icono de Lápiz/Diseño ---
 const DesignIcon: React.FC = () => (
@@ -27,47 +144,14 @@ const IconPlaceHolder: React.FC = () => {
   );
 };
 
-// --- Datos de los Servicios ---
-const servicesData = [
-  {
-    title: "Desarrollo Full Stack",
-    description: "Creación de aplicaciones modernas con React, Node.js, Laravel y PHP",
-  },
-  {
-    title: "Consultoría y Soporte TI",
-    description: "Asesoría especializada en infraestructura, mantenimiento y soluciones tecnológicas.",
-  },
-  {
-    title: "Arquitectura de Software y Diseño de APIs",
-    description: "Implementación de sistemas seguros, escalables y eficientes.",
-  },
-  {
-    title: "Gestión Técnica de Proyectos",
-    description: "Liderazgo de equipos de desarrollo y entrega de proyectos de alta calidad.",
-  },
-  {
-    title: "Automatización de Procesos (RPA)",
-    description: "Optimización de tareas mediante scripts y bots con Python o N8N",
-  },
-  {
-    title: "Diseño UI/UX",
-    description: "Creación de interfaces intuitivas, modernas y centradas en la experiencia del usuario",
-  },
-  {
-  title: "Diseño Web en WordPress",
-  description: "Desarrollo de sitios web profesionales y administrables con WordPress, optimizados para rendimiento y posicionamiento.",
-},
-
-];
-
 // --- Componente de Tarjeta de Servicio ---
-const ServiceCard: React.FC<{ service: typeof servicesData[0], delay: number }> = ({ service, delay }) => {
+const ServiceCard: React.FC<{ service: { title: string; description: string }, delay: number }> = ({ service, delay }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: delay }}
-      className="w-full bg-black border border-white/10 p-8 rounded-xl relative shadow-lg group overflow-hidden"
+      className="w-full bg-black border border-white/10 p-6 sm:p-8 rounded-xl relative shadow-lg group overflow-hidden"
     >
       {/* Detalle animado de borde verde */}
       <motion.div
@@ -79,43 +163,22 @@ const ServiceCard: React.FC<{ service: typeof servicesData[0], delay: number }> 
       
       <div className="absolute inset-0 border border-white/10 rounded-xl group-hover:border-green-500/50 transition-colors duration-300 pointer-events-none" />
 
-      <div className="mb-6 relative">
+      <div className="mb-4 sm:mb-6 relative">
         <IconPlaceHolder />
       </div>
       
-      <h3 className="text-2xl font-bold mt-4 mb-3">{service.title}</h3>
-      <p className="text-sm text-white/70 mb-8">
+      <h3 className="text-xl sm:text-2xl font-bold mt-4 mb-2 sm:mb-3">{service.title}</h3>
+      <p className="text-sm text-white/70 mb-6 sm:mb-8">
         {service.description}
       </p>
-      
-      
     </motion.div>
   );
 };
 
-// --- Componente Principal About ---
-const About: React.FC = () => {
-const roles = [
-  "FULL STACK DEVELOPER",
-  "SOFTWARE ARCHITECT",
-  "PROJECT MANAGER",
-  "TECH LEAD",
-  "UI/UX DESIGNER",
-  "SOFTWARE ENGINEER",
-  "DEVOPS ENGINEER",
-  "SYSTEM ADMINISTRATOR",
-  "IT CONSULTANT",
-  "TECHNICAL SUPPORT SPECIALIST",
-  "AUTOMATION DEVELOPER (RPA)",
-  "DATABASE DESIGNER",
-  "CLOUD SOLUTIONS ARCHITECT",
-  "CYBERSECURITY ANALYST",
-  "DATA ANALYST",
-  "INTEGRATION ENGINEER",
-  "SCRUM MASTER",
-  "INSTRUCTOR / MENTOR",
-];
-
+// --- Componente Principal Services ---
+const Services: React.FC = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
@@ -127,7 +190,7 @@ const roles = [
   }, []);
 
   const itemsPerPage = isMobile ? 1 : 3;
-  const maxIndex = Math.ceil(servicesData.length - itemsPerPage);
+  const maxIndex = Math.ceil(t.services.length - itemsPerPage);
 
   const handleNext = () => {
     if (currentIndex < maxIndex) {
@@ -141,19 +204,19 @@ const roles = [
     }
   };
 
-  const visibleServices = servicesData.slice(currentIndex, currentIndex + itemsPerPage);
+  const visibleServices = t.services.slice(currentIndex, currentIndex + itemsPerPage);
 
   return (
-    <section id="services" className="relative py-24 bg-black text-white min-h-screen">
+    <section id="services" className="relative py-16 sm:py-20 md:py-24 bg-black text-white min-h-screen">
       {/* Franja animada superior */}
       <motion.div
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="absolute top-0 w-full bg-green-500 py-4 md:py-5 overflow-hidden z-20"
+        className="absolute top-0 w-full bg-green-500 py-3 sm:py-4 md:py-5 overflow-hidden z-20"
       >
         <motion.div
-          className="whitespace-nowrap text-black font-extrabold text-xl md:text-3xl tracking-wider"
+          className="whitespace-nowrap text-black font-extrabold text-base sm:text-xl md:text-2xl lg:text-3xl tracking-wider"
           animate={{ x: ["0%", "-50%"] }}
           transition={{
             repeat: Infinity,
@@ -161,8 +224,8 @@ const roles = [
             ease: "linear",
           }}
         >
-          {roles.concat(roles).map((role, index) => (
-            <span key={index} className="mx-10 md:mx-16">
+          {t.roles.concat(t.roles).map((role, index) => (
+            <span key={index} className="mx-6 sm:mx-10 md:mx-16">
               {role} *
             </span>
           ))}
@@ -170,43 +233,43 @@ const roles = [
       </motion.div>
 
       {/* Contenido principal: Servicios */}
-      <div className="pt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="pt-20 sm:pt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Encabezado */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex justify-start items-end mb-16"
+          className="flex justify-start items-end mb-12 sm:mb-16"
         >
           <div className="relative">
-            <h1 className="absolute -top-10 left-0 text-7xl md:text-9xl font-extrabold text-white/5 opacity-5 tracking-widest pointer-events-none">
-              SERVICES
+            <h1 className="hidden sm:block absolute -top-8 md:-top-10 left-0 text-6xl md:text-8xl lg:text-9xl font-extrabold text-white/5 opacity-5 tracking-widest pointer-events-none">
+              {t.sectionLabel}
             </h1>
-           <p className="text-sm font-semibold text-white/70 mb-1 relative z-10">
-  Experiencia y tecnología a su servicio
-</p>
-<h2 className="text-4xl md:text-6xl font-extrabold relative z-10">
-  <span className="text-green-500">Áreas</span> de Experiencia
-</h2>
-
+            <p className="text-xs sm:text-sm font-semibold text-white/70 mb-1 relative z-10">
+              {t.subtitle}
+            </p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold relative z-10">
+              <span className="text-green-500">{t.title}</span> {t.titleEnd}
+            </h2>
           </div>
         </motion.div>
 
         {/* Contenedor de Carrusel con 3 tarjetas visibles */}
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-3 sm:gap-6 lg:gap-8">
           {/* Flecha izquierda */}
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={handlePrev}
             disabled={currentIndex === 0}
-            className="flex-shrink-0 p-2 bg-green-500 hover:bg-green-600 disabled:bg-gray-600 disabled:cursor-not-allowed rounded-full transition-colors z-30"
+            className="flex-shrink-0 p-1.5 sm:p-2 bg-green-500 hover:bg-green-600 disabled:bg-gray-600 disabled:cursor-not-allowed rounded-full transition-colors z-30"
+            aria-label="Anterior"
           >
-            <ChevronLeft className="w-6 h-6 text-black" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
           </motion.button>
 
-          {/* Grid de 3 columnas */}
-          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Grid de servicios */}
+          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {visibleServices.map((service, index) => (
               <ServiceCard 
                 key={currentIndex + index} 
@@ -222,15 +285,15 @@ const roles = [
             whileTap={{ scale: 0.95 }}
             onClick={handleNext}
             disabled={currentIndex >= maxIndex}
-            className="flex-shrink-0 p-2 bg-green-500 hover:bg-green-600 disabled:bg-gray-600 disabled:cursor-not-allowed rounded-full transition-colors z-30"
+            className="flex-shrink-0 p-1.5 sm:p-2 bg-green-500 hover:bg-green-600 disabled:bg-gray-600 disabled:cursor-not-allowed rounded-full transition-colors z-30"
+            aria-label="Siguiente"
           >
-            <ChevronRight className="w-6 h-6 text-black" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
           </motion.button>
-
         </div>
 
         {/* Indicador de página */}
-        <div className="flex justify-center gap-2 mt-8">
+        <div className="flex justify-center gap-2 mt-6 sm:mt-8">
           {Array.from({ length: maxIndex + 1 }).map((_, index) => (
             <motion.button
               key={index}
@@ -239,6 +302,7 @@ const roles = [
                 index === currentIndex ? "bg-green-500" : "bg-white/30"
               }`}
               whileHover={{ scale: 1.2 }}
+              aria-label={`Página ${index + 1}`}
             />
           ))}
         </div>
@@ -247,4 +311,4 @@ const roles = [
   );
 };
 
-export default About;
+export default Services;

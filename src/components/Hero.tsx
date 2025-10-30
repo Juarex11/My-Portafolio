@@ -1,7 +1,31 @@
 import React, { useEffect, useRef } from "react";
 import rolando from "../assets/rolando-juarez.png";
+import { useLanguage } from "../context/LanguageContext";
+
+// Traducciones
+const translations = {
+  es: {
+    subtitle: "Especialista en Soluciones Tecnológicas",
+    name: "Rolando Ismahel Juarez",
+    title: "Full Stack Developer",
+    description: "Cuento con más de 5 años de experiencia en implementación, arquitectura de software, soporte técnico y diseño de soluciones innovadoras que impulsan la eficiencia y el crecimiento de las organizaciones.",
+    btnProjects: "Ver Proyectos",
+    btnCV: "Descargar CV"
+  },
+  en: {
+    subtitle: "Technology Solutions Specialist",
+    name: "Rolando Ismahel Juarez",
+    title: "Full Stack Developer",
+    description: "I have over 5 years of experience in implementation, software architecture, technical support, and designing innovative solutions that drive efficiency and organizational growth.",
+    btnProjects: "View Projects",
+    btnCV: "Download CV"
+  }
+};
+
 const Hero = () => {
   const canvasRef = useRef(null);
+  const { language } = useLanguage();
+  const t = translations[language];
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -165,7 +189,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="min-h-screen relative flex flex-col md:flex-row items-center justify-center px-6 md:px-10 text-center md:text-left pt-24 pb-20 overflow-hidden bg-black">
+    <section id="home" className="min-h-screen relative flex flex-col md:flex-row items-center justify-center px-6 md:px-10 text-center md:text-left pt-24 pb-20 overflow-hidden bg-black">
       {/* Canvas Background */}
       <canvas 
         ref={canvasRef}
@@ -180,21 +204,24 @@ const Hero = () => {
       {/* Content */}
       <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 relative z-10">
         <div className="flex-1 max-w-xl opacity-0 animate-fadeInLeft">
-          <p className="text-gray-400 mb-2 text-sm md:text-base">Especialista en Soluciones Tecnológicas</p>
+          <p className="text-gray-400 mb-2 text-sm md:text-base">{t.subtitle}</p>
           <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight">
-            Soy <span className="text-green-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.3)]">Rolando Ismahel Juarez</span>, <br />
-            Full Stack <br /> Developer.
+            {language === 'es' ? 'Soy' : "I'm"}{' '}
+            <span className="text-green-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.3)]">
+              {t.name}
+            </span>, <br />
+            {t.title.split(' ')[0]} <br /> {t.title.split(' ').slice(1).join(' ')}.
           </h1>
           <p className="text-gray-400 mt-4 max-w-md opacity-0 animate-fadeIn text-sm md:text-base" style={{ animationDelay: '0.5s' }}>
-           Cuento con más de 5 años de experiencia en implementación, arquitectura de software, soporte técnico y diseño de soluciones innovadoras que impulsan la eficiencia y el crecimiento de las organizaciones.
+            {t.description}
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4 opacity-0 animate-fadeInUp" style={{ animationDelay: '0.8s' }}>
             <button className="bg-green-500 text-black px-6 py-3 rounded-lg font-semibold hover:scale-105 hover:shadow-lg hover:shadow-green-500/30 transition-all duration-300">
-              Ver Proyectos 
+              {t.btnProjects}
             </button>
             <button className="border border-gray-400 text-gray-200 px-6 py-3 rounded-lg hover:bg-gray-800 hover:border-green-500 transition-all duration-300">
-              Descargar CV
+              {t.btnCV}
             </button>
           </div>
         </div>
@@ -210,15 +237,13 @@ const Hero = () => {
             </div>
             
             {/* Imagen responsive */}
-<div className="flex items-center justify-center">
-  <img
-    src={rolando}
-    alt="Rolando Juarez"
-    className="w-[360px] md:w-[440px] lg:w-[520px] rounded-full object-cover shadow-2xl"
-  />
-</div>
-
-
+            <div className="flex items-center justify-center">
+              <img
+                src={rolando}
+                alt="Rolando Juarez"
+                className="w-[360px] md:w-[440px] lg:w-[520px] rounded-full object-cover shadow-2xl"
+              />
+            </div>
 
             {/* Partículas orbitales más sutiles */}
             <div className="hidden md:block absolute top-1/4 right-0 w-2 h-2 bg-green-500 rounded-full animate-orbit shadow-lg shadow-green-500/30" />

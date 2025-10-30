@@ -8,19 +8,23 @@ import Education from "./components/Education";
 import Certification from "./components/Certification";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import { LanguageProvider } from "./context/LanguageContext";
+
 const App: React.FC = () => {
   return (
-    <div className="bg-black text-white min-h-screen">
-      <Navbar />
-      <Hero />
-       <Services />
-          <About />
-             <Projects />
-              <Education />
-                <Certification />
-                 <Contact />
-                   <Footer />
-    </div>
+    <LanguageProvider>
+      <div className="bg-black text-white min-h-screen">
+        <Navbar />
+        <Hero />
+        <Services />
+        <About />
+        <Projects />
+        <Education />
+        <Certification />
+        <Contact />
+        <Footer />
+      </div>
+    </LanguageProvider>
   );
 };
 
