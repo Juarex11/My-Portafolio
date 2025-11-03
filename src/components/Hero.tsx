@@ -23,7 +23,7 @@ const translations = {
 };
 
 const Hero = () => {
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const { language } = useLanguage();
   const t = translations[language];
 
@@ -32,6 +32,7 @@ const Hero = () => {
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
     
     const updateCanvasSize = () => {
       canvas.width = window.innerWidth;
@@ -49,61 +50,79 @@ const Hero = () => {
 
     // Partículas flotantes más sutiles
     class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
+      x: number;
+      y: number;
+      size: number;
+      speedX: number;
+      speedY: number;
+      opacity: number;
+
+      constructor(canvasWidth: number, canvasHeight: number) {
+        this.x = Math.random() * canvasWidth;
+        this.y = Math.random() * canvasHeight;
         this.size = Math.random() * 1.5 + 0.3;
         this.speedX = Math.random() * 0.3 - 0.15;
         this.speedY = Math.random() * 0.3 - 0.15;
         this.opacity = Math.random() * 0.3 + 0.1;
       }
 
-      update() {
+      update(canvasWidth: number, canvasHeight: number) {
         this.x += this.speedX;
         this.y += this.speedY;
 
-        if (this.x > canvas.width) this.x = 0;
-        if (this.x < 0) this.x = canvas.width;
-        if (this.y > canvas.height) this.y = 0;
-        if (this.y < 0) this.y = canvas.height;
+        if (this.x > canvasWidth) this.x = 0;
+        if (this.x < 0) this.x = canvasWidth;
+        if (this.y > canvasHeight) this.y = 0;
+        if (this.y < 0) this.y = canvasHeight;
       }
 
-      draw() {
-        ctx.fillStyle = `rgba(34, 197, 94, ${this.opacity})`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
+      draw(context: CanvasRenderingContext2D) {
+        context.fillStyle = `rgba(34, 197, 94, ${this.opacity})`;
+        context.beginPath();
+        context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        context.fill();
       }
     }
 
     // Grid lines más sutiles
     class GridLine {
-      constructor() {
-        this.y = Math.random() * canvas.height;
+      y: number;
+      speed: number;
+      opacity: number;
+
+      constructor(canvasHeight: number) {
+        this.y = Math.random() * canvasHeight;
         this.speed = Math.random() * 0.2 + 0.05;
         this.opacity = Math.random() * 0.05 + 0.02;
       }
 
-      update() {
+      update(canvasHeight: number) {
         this.y += this.speed;
-        if (this.y > canvas.height) this.y = 0;
+        if (this.y > canvasHeight) this.y = 0;
       }
 
-      draw() {
-        ctx.strokeStyle = `rgba(34, 197, 94, ${this.opacity})`;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(0, this.y);
-        ctx.lineTo(canvas.width, this.y);
-        ctx.stroke();
+      draw(context: CanvasRenderingContext2D, canvasWidth: number) {
+        context.strokeStyle = `rgba(34, 197, 94, ${this.opacity})`;
+        context.lineWidth = 1;
+        context.beginPath();
+        context.moveTo(0, this.y);
+        context.lineTo(canvasWidth, this.y);
+        context.stroke();
       }
     }
 
     // Círculos pulsantes más sutiles
     class PulsingCircle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
+      x: number;
+      y: number;
+      radius: number;
+      maxRadius: number;
+      speed: number;
+      opacity: number;
+
+      constructor(canvasWidth: number, canvasHeight: number) {
+        this.x = Math.random() * canvasWidth;
+        this.y = Math.random() * canvasHeight;
         this.radius = 0;
         this.maxRadius = Math.random() * 80 + 40;
         this.speed = Math.random() * 0.3 + 0.2;
@@ -120,36 +139,38 @@ const Hero = () => {
         }
       }
 
-      draw() {
-        ctx.strokeStyle = `rgba(34, 197, 94, ${this.opacity})`;
-        ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.stroke();
+      draw(context: CanvasRenderingContext2D) {
+        context.strokeStyle = `rgba(34, 197, 94, ${this.opacity})`;
+        context.lineWidth = 1.5;
+        context.beginPath();
+        context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        context.stroke();
       }
     }
 
-    let particles = Array.from({ length: getParticleCount() }, () => new Particle());
-    const gridLines = Array.from({ length: 15 }, () => new GridLine());
-    const pulsingCircles = Array.from({ length: 3 }, () => new PulsingCircle());
+    let particles = Array.from({ length: getParticleCount() }, () => new Particle(canvas.width, canvas.height));
+    const gridLines = Array.from({ length: 15 }, () => new GridLine(canvas.height));
+    const pulsingCircles = Array.from({ length: 3 }, () => new PulsingCircle(canvas.width, canvas.height));
 
     function animate() {
+      if (!ctx || !canvas) return;
+
       ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       gridLines.forEach(line => {
-        line.update();
-        line.draw();
+        line.update(canvas.height);
+        line.draw(ctx, canvas.width);
       });
 
       pulsingCircles.forEach(circle => {
         circle.update();
-        circle.draw();
+        circle.draw(ctx);
       });
 
       particles.forEach(particle => {
-        particle.update();
-        particle.draw();
+        particle.update(canvas.width, canvas.height);
+        particle.draw(ctx);
       });
 
       // Conectar partículas cercanas con menos opacidad
@@ -178,7 +199,7 @@ const Hero = () => {
     const handleResize = () => {
       updateCanvasSize();
       // Recrear partículas según nuevo tamaño
-      particles = Array.from({ length: getParticleCount() }, () => new Particle());
+      particles = Array.from({ length: getParticleCount() }, () => new Particle(canvas.width, canvas.height));
     };
 
     window.addEventListener('resize', handleResize);
@@ -252,7 +273,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes fadeInLeft {
           from { opacity: 0; transform: translateX(-30px); }
           to { opacity: 1; transform: translateX(0); }

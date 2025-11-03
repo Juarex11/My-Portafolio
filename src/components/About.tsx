@@ -68,7 +68,7 @@ const containerVariants = {
 
 const textItemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, damping: 15 } },
+  visible: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 100, damping: 15 } },
 };
 
 const imageVariants = {
@@ -77,7 +77,7 @@ const imageVariants = {
     opacity: 1, 
     scale: 1, 
     rotate: 0, 
-    transition: { type: 'spring', stiffness: 80, damping: 15 } 
+    transition: { type: 'spring' as const, stiffness: 80, damping: 15 } 
   },
 };
 
@@ -99,7 +99,7 @@ const videoModalVariants = {
     x: 0, 
     skewX: 0,
     transition: { 
-      type: "spring", 
+      type: 'spring' as const, 
       stiffness: 100, 
       damping: 20,
       delay: 0.1

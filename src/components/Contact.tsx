@@ -345,7 +345,7 @@ const ContactForm = () => {
                 placeholder={t.messagePlaceholder}
                 value={formData.message}
                 onChange={handleChange}
-                rows="6"
+                 rows={6}
                 className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base text-white placeholder-gray-500 focus:outline-none focus:border-green-500 transition-colors resize-none"
               />
             </div>

@@ -94,7 +94,7 @@ const translations = {
 
 const Certifications = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [selectedImage, setSelectedImage] = useState(null);
+const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [direction, setDirection] = useState('next');
   const [isTransitioning, setIsTransitioning] = useState(false);

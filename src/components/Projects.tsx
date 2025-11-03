@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import p1 from "../assets/1.png";
@@ -153,7 +152,9 @@ const backdropVariants = {
   visible: { opacity: 1 },
 };
 
-const modalVariants = {
+import type { Variants } from "framer-motion";
+
+const modalVariants: Variants = {
   hidden: { 
     opacity: 0, 
     scale: 0.8,
@@ -172,6 +173,7 @@ const modalVariants = {
     transition: { duration: 0.2 }
   },
 };
+
 
 // --- Componente del Modal del Proyecto ---
 const ProjectModal = ({ project, onClose }) => {
@@ -271,7 +273,7 @@ const ProjectModal = ({ project, onClose }) => {
                   key={index}
                   className="relative rounded-lg overflow-hidden border border-white/10 hover:border-green-500/50 transition-colors cursor-pointer group"
                   whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  transition={{ type: 'spring' as const, stiffness: 300 }}
                 >
                   <img 
                     src={src} 
@@ -305,7 +307,7 @@ const ProjectCard = ({ project, index, onOpenModal }) => {
       onClick={() => onOpenModal(project)}
       className="bg-neutral-900 rounded-xl sm:rounded-2xl border border-white/10 p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col lg:flex-row items-center gap-4 sm:gap-6 md:gap-8 cursor-pointer group mb-6 sm:mb-8 lg:mb-10 hover:border-green-500/30 transition-colors"
       whileHover={{ y: -5, scale: 1.01 }}
-      transition={{ type: "spring", stiffness: 300 }}
+      transition={{ type: 'spring' as const, stiffness: 300 }}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
