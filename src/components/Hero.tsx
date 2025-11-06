@@ -238,12 +238,25 @@ const Hero = () => {
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4 opacity-0 animate-fadeInUp" style={{ animationDelay: '0.8s' }}>
-            <button className="bg-green-500 text-black px-6 py-3 rounded-lg font-semibold hover:scale-105 hover:shadow-lg hover:shadow-green-500/30 transition-all duration-300">
-              {t.btnProjects}
-            </button>
-            <button className="border border-gray-400 text-gray-200 px-6 py-3 rounded-lg hover:bg-gray-800 hover:border-green-500 transition-all duration-300">
-              {t.btnCV}
-            </button>
+           <button
+  onClick={() => {
+    const section = document.getElementById("projects");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  }}
+  className="bg-green-500 text-black px-6 py-3 rounded-lg font-semibold hover:scale-105 hover:shadow-lg hover:shadow-green-500/30 transition-all duration-300"
+>
+  {t.btnProjects}
+</button>
+<a
+  href="/assets/juarezcv2025.pdf"
+  download="Rolando-Juarez-CV.pdf"
+  className="border border-gray-400 text-gray-200 px-6 py-3 rounded-lg hover:bg-gray-800 hover:border-green-500 transition-all duration-300 inline-block"
+>
+  {t.btnCV}
+</a>
+
           </div>
         </div>
 

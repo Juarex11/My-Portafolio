@@ -70,7 +70,7 @@ const translations = {
   es: {
     sectionLabel: "Educación y Experiencia",
     title: "Mi",
-    titleHighlight: "Trayectoria",
+    titleHighlight: "Trayectoria ",
     titleAnd: "",
     titleEnd: "Académica y Profesional",
     educationTitle: "Educación",
@@ -145,7 +145,7 @@ const EducationWork = () => {
     <div id="experience" className="min-h-screen bg-black text-white py-12 sm:py-16 md:py-20 px-4 sm:px-6">
       {/* Header */}
       <div className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}>
-        <p className="text-gray-400 text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4 animate-pulse">
+        <p className="text-gray-400 text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4 ">
           {t.sectionLabel}
         </p>
         

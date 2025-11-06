@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { X as XIcon } from "lucide-react";
 import { Facebook, Twitter, Instagram, Linkedin, Send } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -19,7 +19,7 @@ const translations = {
     contactTitle: "Contact",
     contactInfo: {
       phone: "(+51) 981 031 225",
-      website: "www.rjuarez.com",
+      website: "www.juarezdev.com",
       email: "rolando.jp113@gmail.com",
       location: "Lima - Peru"
     },
@@ -82,23 +82,30 @@ const Footer = () => {
               {t.brandDescription}
             </p>
             <div className="flex gap-2.5 sm:gap-3 justify-center sm:justify-start flex-wrap">
-              <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-400 transition-colors flex-shrink-0">
+              <a href="https://www.facebook.com/rolando.juarez.75286100/" className="w-9 h-9 sm:w-10 sm:h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-400 transition-colors flex-shrink-0">
                 <Facebook className="w-4 h-4 sm:w-5 sm:h-5 text-black" />
               </a>
-              <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-400 transition-colors flex-shrink-0">
-                <Twitter className="w-4 h-4 sm:w-5 sm:h-5 text-black" />
-              </a>
-              <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-400 transition-colors flex-shrink-0">
-                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-black" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/>
-                </svg>
-              </a>
-              <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-400 transition-colors flex-shrink-0">
+             <a
+  href="https://x.com/juarexdev" // reemplaza con tu usuario real
+  target="_blank"
+  rel="noopener noreferrer"
+  className="w-9 h-9 sm:w-10 sm:h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-400 transition-colors flex-shrink-0"
+>
+  <XIcon className="w-4 h-4 sm:w-5 sm:h-5 text-black" />
+</a>
+              
+              <a href="https://www.instagram.com/rola_ismaheljp/" className="w-9 h-9 sm:w-10 sm:h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-400 transition-colors flex-shrink-0">
                 <Instagram className="w-4 h-4 sm:w-5 sm:h-5 text-black" />
               </a>
-              <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-400 transition-colors flex-shrink-0">
+              <a href="https://linkedin.com/in/rolando-ismahel-juarez" className="w-9 h-9 sm:w-10 sm:h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-400 transition-colors flex-shrink-0">
                 <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 text-black" />
               </a>
+              <a href="https://github.com/Juarex11" target="_blank" rel="noopener noreferrer" className="w-9 h-9 sm:w-10 sm:h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-400 transition-colors flex-shrink-0">
+  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-black" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.263.82-.583 0-.288-.01-1.05-.015-2.06-3.338.725-4.042-1.61-4.042-1.61-.546-1.387-1.335-1.756-1.335-1.756-1.09-.745.083-.73.083-.73 1.205.084 1.84 1.24 1.84 1.24 1.07 1.835 2.807 1.305 3.492.997.108-.775.418-1.305.762-1.605-2.665-.303-5.466-1.335-5.466-5.93 0-1.31.468-2.38 1.236-3.22-.123-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.3 1.23.957-.266 1.983-.398 3.003-.403 1.02.005 2.047.137 3.006.403 2.287-1.552 3.292-1.23 3.292-1.23.655 1.653.242 2.873.12 3.176.77.84 1.236 1.91 1.236 3.22 0 4.61-2.804 5.625-5.475 5.92.43.37.813 1.096.813 2.21 0 1.596-.015 2.882-.015 3.27 0 .323.216.7.825.58C20.565 21.795 24 17.298 24 12c0-6.63-5.37-12-12-12z" />
+  </svg>
+</a>
+
             </div>
           </div>
 

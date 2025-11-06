@@ -131,21 +131,26 @@ const AboutMeSection = () => {
         initial="hidden"
         whileInView="visible" 
         viewport={{ once: true, amount: 0.2 }} 
+
+        
       >
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
           {/* COLUMNA IZQUIERDA: IMAGEN */}
-          <motion.div
-            className="w-full lg:w-1/2 flex justify-center relative my-6 sm:my-8 lg:my-0"
-            variants={imageVariants}
-          >
-            <div className="relative w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] md:w-[400px] md:h-[400px] rounded-full overflow-hidden shadow-2xl shadow-green-500/20 border-4 border-green-500/20">
-              <img
-                src={rolandoPolo}
-                alt="Rolando Juarez"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </motion.div>
+       <motion.div
+  className="w-full lg:w-1/2 flex justify-center relative my-6 sm:my-8 lg:my-0 select-none"
+  variants={imageVariants}
+>
+  <div className="relative w-[340px] h-[340px] sm:w-[420px] sm:h-[420px] md:w-[500px] md:h-[500px] rounded-full overflow-hidden shadow-2xl shadow-green-500/30 border-green-500/30">
+    <img
+      src={rolandoPolo}
+      alt="Rolando Juarez"
+      className="w-full h-full object-cover pointer-events-none select-none"
+      draggable="false"
+      onContextMenu={(e) => e.preventDefault()}
+    />
+  </div>
+</motion.div>
+
 
           {/* COLUMNA DERECHA: TEXTO, ESTADÍSTICAS Y BOTONES */}
           <motion.div
@@ -193,8 +198,8 @@ const AboutMeSection = () => {
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
               {/* Botón CV */}
               <motion.a
-                href="/path/to/your/cv.pdf" 
-                download
+                href="/assets/juarezcv2025.pdf"
+                download="Rolando-Juarez-CV-2025.pdf"
                 className="inline-block bg-green-500 text-black font-bold py-2.5 sm:py-3 px-6 sm:px-8 rounded-full hover:bg-green-400 transition-colors shadow-lg shadow-green-500/50 text-sm sm:text-base text-center"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}

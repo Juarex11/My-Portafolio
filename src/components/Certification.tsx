@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Eye } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-
+import cert1 from '../assets/certificados/3.png';
+import cert2 from '../assets/certificados/4.png';
+import cert3 from '../assets/certificados/1.png';
+import cert4 from '../assets/certificados/2.png';
+import cert5 from '../assets/certificados/5.png';
+import cert6 from '../assets/certificados/7.png';
+import cert7 from '../assets/certificados/8.png';
+import cert8 from '../assets/certificados/6.png';
 // --- Traducciones ---
 const translations = {
   en: {
@@ -11,40 +18,63 @@ const translations = {
     goToCertification: "Go to certification",
     certifications: [
       {
-        title: "Advanced React Development",
-        issuer: "Meta",
-        date: "2024",
-        image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=400&fit=crop",
-        description: "Comprehensive certification covering advanced React patterns, hooks, performance optimization, and modern state management techniques."
-      },
-      {
-        title: "AWS Solutions Architect",
-        issuer: "Amazon Web Services",
-        date: "2023",
-        image: "https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?w=600&h=400&fit=crop",
-        description: "Professional certification demonstrating expertise in designing and deploying scalable, highly available systems on AWS."
-      },
-      {
-        title: "UI/UX Design Professional",
-        issuer: "Google",
-        date: "2023",
-        image: "https://images.unsplash.com/photo-1616499452765-c37a6cd4de37?w=600&h=400&fit=crop",
-        description: "Certificate in user interface and experience design, covering design thinking, prototyping, and user research methodologies."
-      },
-      {
-        title: "Full Stack Web Development",
-        issuer: "freeCodeCamp",
-        date: "2022",
-        image: "https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=600&h=400&fit=crop",
-        description: "Comprehensive program covering frontend and backend development, databases, APIs, and modern web technologies."
-      },
-      {
-        title: "Certified Scrum Master",
-        issuer: "Scrum Alliance",
-        date: "2022",
-        image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop",
-        description: "Professional certification in agile methodologies, scrum framework, and team facilitation best practices."
-      }
+    title: "Professional  Title in Software Development",
+    issuer: "SENATI (Republic of Peru)",
+    date: "2025",
+        image: cert1,
+    description: "Comprehensive training in software development, covering programming, databases, web development, and best practices in software engineering."
+
+  },
+  {
+    title: "SCRUM FOUNDATION PROFESSIONAL CERTIFICATION (SFPC™)",
+    issuer: "CertiProf® Professional Knowledge",
+    date: "2023",
+      image: cert2,
+    description: "Certification validating fundamental knowledge of Scrum and agile project management, including roles, artifacts, and events."
+  },
+  {
+    title: "Professional Scrum Course",
+    issuer: "Platzi",
+    date: "2024 (12 hours)",
+     image: cert3,
+    description: "Practical training in agile methodologies, project management with Scrum, and collaborative planning tools."
+  },
+  {
+    title: "Certificate: Cloud Computing with Microsoft Azure & AWS",
+    issuer: "TECSUP (CPE - Courses and Extension Programs)",
+    date: "2024 (36 hours)",
+      image: cert4,
+    description: "Knowledge in cloud computing, deploying applications and services on Microsoft Azure and AWS, including resource management and security."
+  },
+  {
+    title: "Certificate of Completion: Java Foundations Final Exam",
+    issuer: "Oracle Academy",
+    date: "2023",
+     image: cert5,
+
+    description: "Fundamentals of Java programming, algorithm development, and handling basic data structures."
+  },
+  {
+    title: "Certificate of Completion: Introduction to Cybersecurity",
+    issuer: "Cisco Networking Academy",
+    date: "2022",
+         image: cert6,
+    description: "Basic cybersecurity concepts, data protection, and best practices in network and system security."
+  },
+  {
+    title: "Certificate of Completion: Introduction to IoT",
+    issuer: "Cisco Networking Academy",
+    date: "2022",
+     image: cert7,
+    description: "Introduction to the Internet of Things, sensors, connected devices, and data communication."
+  },
+  {
+    title: "Certificate of Completion: Get Connected",
+    issuer: "Cisco Networking Academy",
+    date: "2022",
+     image: cert8,
+    description: "Foundations of networking, connectivity, and data communication, focused on practical skills in basic networking."
+  }
     ],
   },
   es: {
@@ -53,41 +83,62 @@ const translations = {
     titleHighlight: "profesionales",
     goToCertification: "Ir a certificación",
     certifications: [
-      {
-        title: "Desarrollo Avanzado de React",
-        issuer: "Meta",
-        date: "2024",
-        image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=400&fit=crop",
-        description: "Certificación integral que cubre patrones avanzados de React, hooks, optimización de rendimiento y técnicas modernas de gestión de estado."
-      },
-      {
-        title: "Arquitecto de Soluciones AWS",
-        issuer: "Amazon Web Services",
-        date: "2023",
-        image: "https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?w=600&h=400&fit=crop",
-        description: "Certificación profesional que demuestra experiencia en diseño e implementación de sistemas escalables y de alta disponibilidad en AWS."
-      },
-      {
-        title: "Profesional en Diseño UI/UX",
-        issuer: "Google",
-        date: "2023",
-        image: "https://images.unsplash.com/photo-1616499452765-c37a6cd4de37?w=600&h=400&fit=crop",
-        description: "Certificado en diseño de interfaz y experiencia de usuario, cubriendo pensamiento de diseño, prototipado y metodologías de investigación."
-      },
-      {
-        title: "Desarrollo Web Full Stack",
-        issuer: "freeCodeCamp",
-        date: "2022",
-        image: "https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=600&h=400&fit=crop",
-        description: "Programa integral que cubre desarrollo frontend y backend, bases de datos, APIs y tecnologías web modernas."
-      },
-      {
-        title: "Scrum Master Certificado",
-        issuer: "Scrum Alliance",
-        date: "2022",
-        image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop",
-        description: "Certificación profesional en metodologías ágiles, framework scrum y mejores prácticas de facilitación de equipos."
-      }
+       {
+    title: "Título Profesional  en Desarrollo de Software",
+    issuer: "SENATI (República del Perú)",
+    date: "2024",
+     image: cert1,
+    description: "Formación integral en desarrollo de software, abarcando programación, bases de datos, desarrollo web y buenas prácticas de ingeniería de software."
+  },
+  {
+    title: "SCRUM FOUNDATION PROFESSIONAL CERTIFICATION (SFPC™)",
+    issuer: "CertiProf® Professional Knowledge",
+    date: "2023",
+     image: cert2,
+    description: "Certificación que valida conocimientos fundamentales de Scrum y gestión ágil de proyectos, incluyendo roles, artefactos y eventos."
+  },
+  {
+    title: "Curso Profesional de Scrum",
+    issuer: "Platzi",
+    date: "2024 (12 horas)",
+     image: cert3,
+    description: "Capacitación práctica en metodologías ágiles, gestión de proyectos con Scrum y herramientas de planificación colaborativa."
+  },
+  {
+    title: "Certificado: Cloud Computing con Microsoft Azure & AWS",
+    issuer: "TECSUP (CPE - Cursos y Programas de Extensión)",
+    date: "2024 (36 horas)",
+     image: cert4,
+    description: "Conocimientos en computación en la nube, despliegue de aplicaciones y servicios en Microsoft Azure y AWS, incluyendo gestión de recursos y seguridad."
+  },
+  {
+    title: "Certificado de Aprobación de Examen Final Java Foundations",
+    issuer: "Oracle Academy",
+    date: "2023",
+     image: cert5,
+    description: "Fundamentos de programación en Java, desarrollo de algoritmos y manejo de estructuras de datos básicas."
+  },
+  {
+    title: "Certificado de finalización del curso: Introducción a la Seguridad Cibernética",
+    issuer: "Cisco Networking Academy",
+    date: "2022",
+     image: cert6,
+    description: "Conceptos básicos de ciberseguridad, protección de datos y buenas prácticas de seguridad en redes y sistemas."
+  },
+  {
+    title: "Certificado de finalización del curso: Introducción a IoT",
+    issuer: "Cisco Networking Academy",
+    date: "2022",
+    image: cert7,
+    description: "Introducción a Internet de las Cosas, sensores, dispositivos conectados y comunicación de datos."
+  },
+  {
+    title: "Certificado de finalización del curso: Get Connected",
+    issuer: "Cisco Networking Academy",
+    date: "2022",
+    image: cert8,
+    description: "Fundamentos de redes, conectividad y comunicación de datos, orientado a habilidades prácticas en redes básicas."
+  }
     ],
   },
 };

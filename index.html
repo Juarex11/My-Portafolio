@@ -113,7 +113,211 @@
   Contact
 </a>
 
+ <div class="skills-container">
+        <div class="skills-row" id="skillsRow"></div>
+    </div>
 
+    <script>
+        const skillsSets = [
+            [
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', name: 'Python' },
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', name: 'React' },
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg', name: 'Node.js' },
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg', name: 'Laravel' }
+            ],
+            [
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg', name: 'Java' },
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg', name: 'TypeScript' },
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg', name: 'MongoDB' },
+      { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg', name: 'WordPress' }
+
+            ],
+            [
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', name: 'JavaScript' },
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg', name: 'Vue.js' },
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg', name: 'PHP' },
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg', name: 'Docker' }
+            ],
+            [
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ruby/ruby-original.svg', name: 'Ruby' },
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg', name: 'Next.js' },
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg', name: 'Angular' },
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg', name: 'Git' }
+            ],
+            [
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg', name: 'HTML5' },
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg', name: 'Bootstrap' },
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg', name: 'MySQL' },
+                { img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg', name: 'Tailwind' }
+            ]
+        ];
+
+        let currentSet = 0;
+        const skillsRow = document.getElementById('skillsRow');
+
+        function showSkillSet(index) {
+            const skills = skillsSets[index];
+            
+            // Fade out actual
+            const circles = document.querySelectorAll('.skill-circle');
+            circles.forEach(circle => circle.classList.add('fade-out'));
+            
+            setTimeout(() => {
+                skillsRow.innerHTML = '';
+                
+                skills.forEach((skill, i) => {
+                    const circle = document.createElement('div');
+                    circle.className = 'skill-circle';
+                    circle.title = skill.name;
+                    circle.innerHTML = `<img src="${skill.img}" alt="${skill.name}">`;
+                    skillsRow.appendChild(circle);
+                });
+            }, 300);
+        }
+
+        // Auto-rotate cada 4 segundos
+        setInterval(() => {
+            currentSet = (currentSet + 1) % skillsSets.length;
+            showSkillSet(currentSet);
+        }, 4000);
+
+        // Inicializar
+        showSkillSet(0);
+    </script>
     <script type="module" src="/src/main.tsx"></script>
+ <style>
+    .skills-container {
+        position: fixed;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 20px;
+        z-index: 1000;
+    }
+
+    .skills-row {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .skill-circle {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #1a1a1a, #2b2b2b);
+        backdrop-filter: blur(8px);
+        border: 2px solid rgba(0, 255, 120, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        position: relative;
+        overflow: hidden;
+        animation: slideIn 0.5s ease forwards;
+        opacity: 0;
+    }
+
+    .skill-circle:nth-child(1) { animation-delay: 0s; }
+    .skill-circle:nth-child(2) { animation-delay: 0.1s; }
+    .skill-circle:nth-child(3) { animation-delay: 0.2s; }
+    .skill-circle:nth-child(4) { animation-delay: 0.3s; }
+
+    .skill-circle::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(0, 255, 120, 0.2), transparent);
+        animation: rotate 3s linear infinite;
+    }
+
+.skill-circle:hover {
+    transform: scale(1.12) rotate(6deg);
+    border-color: rgba(0, 255, 120, 0.5);
+    box-shadow: 0 0 20px rgba(0, 255, 120, 0.3);
+    background: linear-gradient(145deg, #2b2b2b, #353535);
+    transition: border-color 0.5s ease, box-shadow 0.6s ease, transform 0.4s ease;
+}
+
+
+    .skill-circle img {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+        position: relative;
+        z-index: 2;
+        transition: transform 0.3s ease, filter 0.3s ease;
+        filter: brightness(1.1) contrast(1.1);
+        /* sin tono verde, queda neutral y visible sobre gris */
+    }
+
+    .skill-circle:hover img {
+        transform: scale(1.1) rotate(-10deg);
+        /* leve tono verde al pasar el mouse */
+    }
+
+    /* Efecto pulso con verde y gris */
+    @keyframes pulse {
+        0%, 100% { box-shadow: 0 0 15px rgba(0, 255, 120, 0.2); }
+        50% { box-shadow: 0 0 30px rgba(0, 255, 120, 0.6); }
+    }
+
+    .skill-circle.active {
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes slideIn {
+        from { opacity: 0; transform: translateX(-50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes rotate {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .skill-circle.fade-out {
+        animation: fadeOut 0.3s ease forwards;
+    }
+
+    @keyframes fadeOut {
+        to {
+            opacity: 0;
+            transform: scale(0.8) translateX(-20px);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .skills-container {
+            position: relative;
+            left: 0;
+            top: 0;
+            transform: none;
+            padding: 10px;
+        }
+
+        .skill-circle {
+            width: 65px;
+            height: 65px;
+        }
+
+        .skill-circle img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .skills-row {
+            gap: 10px;
+        }
+    }
+</style>
+
+
   </body>
 </html>
